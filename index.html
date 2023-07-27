@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/319b5d1465.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <div>
+        <header class="bg-success text-dark text-center text-uppercase font-weight-bold p-4 mb-4">
+            ICON COACHING classes bhokardan student Entry Form 2023-2024
+        </header>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 ">
+                <form id="stdForm">
+                    <div class="form-group">
+                        <label for="fname" class="font-weight-bold">First Name*</label>
+                        <input type="text" required id="fname" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="lname" class="font-weight-bold">Last Name*</label>
+                        <input type="text" required id="lname" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Adhaar" class="font-weight-bold">EmailID*</label>
+                        <input type="text"  required id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact" class="font-weight-bold">Contact Number*</label>
+                        <input type="text" id="contact" class="form-control">
+                    </div>
+                    <div class="form-group text-left">
+                        <button type="submit" id="submitbtn" class="btn btn-primary ">Add student</button>
+                        <button type="button" id="stdupdatebtn" class="btn btn-primary d-none">Update student</button>
+                    </div>
+                </form>
+            </div>
+          
+        </div>
+        <div class="col-md-9">
+            <p class="alert alert-info" id="nostdData">
+                No Student recorded Founded Yet !!!
+            </p>
+           
+            <div class="table-responsive d-none " id="stdTable">
+                <table class="table table-bordered">
+                   
+                    <thead>
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>First Name</th>
+                            <th>last Name</th>
+                            <th>EmailID</th>
+                            <th>Contact</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stdinfocontainer">
+                         <!-- <tr>
+                            <td>1</td>
+                            <td>Bhupendra</td>
+                            <td>Janjal</td>
+                            <td>Bhupendrajanjal@gmail.com</td>
+                            <td>7578451254</td>
+                            <td class="text-center">
+                                <i class="fa-solid fa-2x fa-pen-to-square mr-3 edit"></i>
+                            </td>
+                            <td class="text-center">
+                                <i class="fa-solid fa-2x fa-trash delete"></i>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+         
+        </div>
+    </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+
+</body>
+</html>
