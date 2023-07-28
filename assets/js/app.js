@@ -44,8 +44,9 @@ const trTemplating=(arr)=>{
         
                 `
     });
-    stdinfocontainer.innerHTML = result
+    stdinfocontainer.innerHTML = result;
 }
+
 
 
 const onStdEdit = (ele)=>{
@@ -67,10 +68,18 @@ const onStdEdit = (ele)=>{
 }
 
 const onStdDelete = (ele)=>{
-    cl(ele.closest("tr").id,"Deleted")
+    let confirmDelete = confirm("Are You Sure , you want to delete delete this student?")
+    if(confirmDelete){
+         let DeleteId = ele.closest("tr").id;
+         cl(DeleteId)
+         let stdArra= stdArray.filter(std=> std.stdId !== DeleteId);
+         localStorage.setItem("stdData",JSON.stringify(stdArra));
+         document.getElementById(DeleteId).remove();
 
-    let Deleted = ele.closest("tr").id;
-    cl(Deleted)
+         }
+    else{
+        return
+    }
 }
 
 
@@ -100,7 +109,7 @@ const onStdAdd=(eve)=>{
         stdId : uuid(),
     }
     cl(stdobj)
-    stdArray.unshift(stdobj)
+    stdArray.push(stdobj)
     nostdData.innerHTML = `No of Student Are ${stdArray.length}`
     eve.target.reset();
     stdTable.classList.remove('d-none');
@@ -111,8 +120,10 @@ const onStdAdd=(eve)=>{
 }
 
 
-const onstdInfoUpdate = ()=>{
+const onstdInfoUpdate = (eve)=>{
+    
     let updateId = localStorage.getItem("editId")
+    localStorage.removeItem("editId");
 
     let updatedobj = {
         fname : fnamecontrol.value,
@@ -124,7 +135,7 @@ const onstdInfoUpdate = ()=>{
     cl(updatedobj)
 
     for(let i=0; i< stdArray.length;i++){
-        if(stdArray[i].stdId = updateId){
+        if(stdArray[i].stdId === updateId){
             stdArray[i].fname = updatedobj.fname;
             stdArray[i].lname = updatedobj.lname;
             stdArray[i].email = updatedobj.email;
@@ -134,8 +145,10 @@ const onstdInfoUpdate = ()=>{
         }
         
     }
+   
     localStorage.setItem("stdData",JSON.stringify(stdArray));
-    trTemplating(stdArray)
+    trTemplating(stdArray);
+    
 }
 
 stdForm.addEventListener("submit",onStdAdd)
