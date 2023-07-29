@@ -62,10 +62,16 @@ const onStdEdit = (ele)=>{
     lnamecontrol.value = editobj.lname;
     emailcontrol.value = editobj.email;
     contactcontrol.value = editobj.contact;
-
     stdupdatebtn.classList.remove('d-none')
     submitbtn.classList.add('d-none')
 }
+
+Swal.fire({
+    icon:"success",
+    title : "Refresh Students Success ",
+    timer : 10000,  
+    
+}) 
 
 const onStdDelete = (ele)=>{
     let confirmDelete = confirm("Are You Sure , you want to delete delete this student?")
@@ -75,12 +81,21 @@ const onStdDelete = (ele)=>{
          let stdArra= stdArray.filter(std=> std.stdId !== DeleteId);
          localStorage.setItem("stdData",JSON.stringify(stdArra));
          document.getElementById(DeleteId).remove();
+         nostdData.innerHTML = `No of Student Are ${stdArra.length}`
 
          }
     else{
         return
     }
-}
+   
+    Swal.fire({
+        icon:"Delete",
+        title : "Delete Student Successfully ",
+        timer : 5000,  
+        
+    }) 
+   
+} 
 
 
 if(localStorage.getItem("stdData")){
@@ -90,12 +105,16 @@ if(localStorage.getItem("stdData")){
     stdTable.classList.remove('d-none');
     // nostdData.classList.add('d-none');
     nostdData.innerHTML = `No of Student Are ${data.length}`
+    // Swal.fire({
+    //     icon:"success",
+    //     title : "Refrash Student ",
+    //     timer : 2000,
+    // })
 
 
 }else{
     stdTable.classList.add('d-none');
     nostdData.classList.remove('d-none');
-
 }
 
 
@@ -108,23 +127,34 @@ const onStdAdd=(eve)=>{
         contact : contactcontrol.value,
         stdId : uuid(),
     }
+    
     cl(stdobj)
     stdArray.push(stdobj)
+    
+    Swal.fire({
+        icon:"Delete",
+        title : "ADD Student Successfully ",
+        timer : 5000,  
+        
+    }) 
     nostdData.innerHTML = `No of Student Are ${stdArray.length}`
     eve.target.reset();
     stdTable.classList.remove('d-none');
     // nostdData.classList.add('d-none');
     trTemplating(stdArray);
+  
     localStorage.setItem("stdData",JSON.stringify(stdArray)) 
     
+
 }
 
 
-const onstdInfoUpdate = (eve)=>{
-    
-    let updateId = localStorage.getItem("editId")
+const onstdInfoUpdate = (eve1)=>{
+    eve1.preventDefault();
+    let updateId = localStorage.getItem("editId")  
+   
     localStorage.removeItem("editId");
-
+   
     let updatedobj = {
         fname : fnamecontrol.value,
         lname : lnamecontrol.value,
@@ -132,8 +162,9 @@ const onstdInfoUpdate = (eve)=>{
         contact : contactcontrol.value,
 
     }
+   
     cl(updatedobj)
-
+ 
     for(let i=0; i< stdArray.length;i++){
         if(stdArray[i].stdId === updateId){
             stdArray[i].fname = updatedobj.fname;
@@ -141,15 +172,29 @@ const onstdInfoUpdate = (eve)=>{
             stdArray[i].email = updatedobj.email;
             stdArray[i].contact = updatedobj.contact;
             break;
-
-        }
+        }    
+    }   Swal.fire({
+        icon:"success",
+        title : "Update Student Success",
+        timer : 2000,  
         
-    }
-   
+    }) 
+    
     localStorage.setItem("stdData",JSON.stringify(stdArray));
     trTemplating(stdArray);
-    
-}
+    // let tr =[... document.getElementById(updateId)]
+    // cl(tr.children)
+    // tr[1].innerHTML = updatedobj.fname;
+    // tr[2].innerHTML = updatedobj.lname;
+    // tr[3].innerHTML = updatedobj.email;
+    // tr[4].innerHTML = updatedobj.contact;
+
+   
+
+    stdForm.reset()
+    stdupdatebtn.classList.add("d-none")
+    submitbtn.classList.remove("d-none")
+} 
 
 stdForm.addEventListener("submit",onStdAdd)
 stdupdatebtn.addEventListener("click",onstdInfoUpdate)
