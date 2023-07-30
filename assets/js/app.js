@@ -89,11 +89,25 @@ const onStdDelete = (ele)=>{
     }
    
     Swal.fire({
-        icon:"Delete",
-        title : "Delete Student Successfully ",
-        timer : 5000,  
-        
-    }) 
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        timer : 5000,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success',
+            
+          )
+          
+        }
+      })
    
 } 
 
@@ -130,6 +144,7 @@ const onStdAdd=(eve)=>{
     
     cl(stdobj)
     stdArray.push(stdobj)
+    
     
     Swal.fire({
         icon:"Delete",
